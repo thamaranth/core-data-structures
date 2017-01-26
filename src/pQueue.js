@@ -41,11 +41,27 @@ export default class PriorityQueue {
       for(let pair of this.elements) {
         if (pair[1] > highest[1]) {
           highest = pair
-          highest.splice()
         }
       }
-      return highest.slice()
+      this.elements.splice(this.elements.indexOf(highest),1)
+      return highest
     }
     return null
   }
+
+  isEmpty() {
+    if (this.elements.length){
+      return false
+    }
+    return true
+  }
+
+  length() {
+    let count = 0
+    for (let key in this.elements) {
+        count++
+    }
+    return count
+  }
+
 }
