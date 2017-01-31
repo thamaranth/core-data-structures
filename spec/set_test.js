@@ -157,6 +157,4 @@ describe('Set', () => {
         .to.deep.equal(['A', 'B', 'C'])
     })
   })
-
->>>>>>> 6b6e0bc454643ca2afa1a9c01e423760549881d0
 })
