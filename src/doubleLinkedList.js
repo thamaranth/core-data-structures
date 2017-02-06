@@ -6,6 +6,10 @@ class Node {
     this.next = null
     this.prev = null
   }
+
+  getData(){
+    return this.data
+  }
 }
 
 export default class DoubleLinkedList {
@@ -13,6 +17,10 @@ export default class DoubleLinkedList {
     this.count = 0
     this.head = null
     this.tail = null
+  }
+
+  getData() {
+   return data
   }
 
   getHeadNode() {
@@ -26,15 +34,15 @@ export default class DoubleLinkedList {
 
   find(item) {
     let currentNode = this.head
-      while (currentNode) {
-        if (currentNode.data === item) {
-          return currentNode
-        } else {
-          currentNode = currentNode.next
-        }
+    while (currentNode) {
+      if (currentNode.data === item) {
+        return currentNode
+      } else {
+        currentNode = currentNode.next
       }
-      return -1
-  }
+    }
+    return -1
+}
 
   clear() {
     this.head = null
@@ -53,8 +61,6 @@ export default class DoubleLinkedList {
     }
     this.tail = newNode
     this.count++
-
-    return newNode
   }
 
   insertFirst(item) {
@@ -84,7 +90,7 @@ export default class DoubleLinkedList {
     } else {
       let currentNode = this.head
       while (currentNode.next !== newNode.next) {
-      currentNode = currentNode.next
+        currentNode = currentNode.next
     }
     newNode.prev = currentNode
     currentNode.next = newNode
@@ -96,9 +102,9 @@ export default class DoubleLinkedList {
   insertAfter(item, data) {
     const newNode = new Node(data)
 
-    if (this.find(item) === this.tail {
-    newNode.prev = this.tail
-    this.tail = newNode
+    if (this.find(item) === this.tail) {
+      newNode.prev = this.tail
+      this.tail = newNode
     }
     newNode.next = this.find(item).next
     newNode.prev = this.find(item)
@@ -108,17 +114,13 @@ export default class DoubleLinkedList {
   }
 
   remove() {
-    if (this.count === 1) {
-      this.clear()
-    } else {
-      let currentNode = this.getHeadNode()
-      while (currentNode.next.next) {
-        currentNode = currentNode.next
-      }
-      currentNode.next = null
-      this.count--
-      this.tail = currentNode
-    }
+    const newTail = this.tail.prev
+
+    this.tail.prev = null
+    newTail.next = null
+
+    this.count--
+    this.tail = newTail
 
   }
 
@@ -127,6 +129,7 @@ export default class DoubleLinkedList {
       this.clear()
     } else {
       this.head = this.getHeadNode().next
+      this.head.prev = null
       this.count--
     }
 
@@ -134,7 +137,7 @@ export default class DoubleLinkedList {
 
   isEmpty() {
     if(!this.head){
-      return null
+      return this.head === undefined
     } else {
       return this.data
     }

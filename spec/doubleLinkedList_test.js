@@ -17,11 +17,11 @@ describe('Double Linked List', () => {
 
       expect(() => doubleLinkedList.insert('foo'))
         .to.alter(() => doubleLinkedList.count, { from: 0, to: 1 })
-      expect(doubleLinkedList.getHeadNode().data)
+      expect(doubleLinkedList.getHeadNode().getData())
         .to.equal('foo')
       expect(() => doubleLinkedList.insert('boo'))
         .to.alter(() => doubleLinkedList.count, { from: 1, to: 2 })
-       expect(doubleLinkedList.getTailNode().data)
+       expect(doubleLinkedList.getTailNode().getData())
         .to.equal('boo')
     })
   })
@@ -35,9 +35,9 @@ describe('Double Linked List', () => {
       expect(() => doubleLinkedList.insertFirst('boo'))
         .to.alter(() => doubleLinkedList.count, { from: 1, to: 2 })
         console.log(doubleLinkedList)
-      expect(doubleLinkedList.getHeadNode().data)
+      expect(doubleLinkedList.getHeadNode().getData())
         .to.equal('boo')
-      expect(doubleLinkedList.getTailNode().data)
+      expect(doubleLinkedList.getTailNode().getData())
         .to.equal('foo')
     })
   })
@@ -61,9 +61,8 @@ describe('Double Linked List', () => {
       doubleLinkedList.insertFirst('boo')
       doubleLinkedList.insertFirst('shoo')
       doubleLinkedList.insertFirst('test')
-      console.log(doubleLinkedList)
 
-      expect(doubleLinkedList.find('shoo').data)
+      expect(doubleLinkedList.find('shoo').getData())
         .to.equal('shoo')
       expect(doubleLinkedList.find('tap'))
         .to.equal(-1)
@@ -76,9 +75,10 @@ describe('Double Linked List', () => {
       doubleLinkedList.insertFirst('foo')
       doubleLinkedList.insertFirst('boo')
       doubleLinkedList.insert('shoo')
+      doubleLinkedList.clear()
 
-      expect(doubleLinkedList.clear())
-      .to.be.undefined
+      expect(doubleLinkedList)
+      .to.deep.equal({ count: 0, head: null, tail: null })
     })
   })
 
@@ -91,11 +91,11 @@ describe('Double Linked List', () => {
 
       expect(doubleLinkedList.removeFirst())
       .to.be.undefined
-      expect(doubleLinkedList.getHeadNode().data)
+      expect(doubleLinkedList.getHeadNode().getData())
       .to.equal('foo')
       expect(doubleLinkedList.removeFirst())
       .to.be.undefined
-      expect(doubleLinkedList.getHeadNode().data)
+      expect(doubleLinkedList.getHeadNode().getData())
       .to.equal('shoo')
     })
   })
@@ -109,11 +109,11 @@ describe('Double Linked List', () => {
 
       expect(doubleLinkedList.remove())
       .to.be.undefined
-      expect(doubleLinkedList.getTailNode().data)
+      expect(doubleLinkedList.getTailNode().getData())
       .to.equal('foo')
       expect(doubleLinkedList.remove())
       .to.be.undefined
-      expect(doubleLinkedList.getTailNode().data)
+      expect(doubleLinkedList.getTailNode().getData())
       .to.equal('boo')
     })
   })
@@ -127,16 +127,16 @@ describe('Double Linked List', () => {
 
       expect(doubleLinkedList.insertAfter('shoo', 'moo'))
       .to.be.undefined
-      expect(doubleLinkedList.getTailNode().data)
+      expect(doubleLinkedList.getTailNode().getData())
       .to.equal('moo')
       expect(doubleLinkedList.insertAfter('moo', 'doo'))
       .to.be.undefined
-      expect(doubleLinkedList.getTailNode().data)
+      expect(doubleLinkedList.getTailNode().getData())
       .to.equal('doo')
     })
   })
 
-  describe.only('insertBefore()', () => {
+  describe('insertBefore()', () => {
     it('Inserts a node (with data) before the first node containing (item)', () => {
       const doubleLinkedList = new DoubleLinkedList()
       doubleLinkedList.insertFirst('foo')
@@ -145,11 +145,11 @@ describe('Double Linked List', () => {
 
       expect(doubleLinkedList.insertBefore('shoo', 'moo'))
       .to.be.undefined
-      expect(doubleLinkedList.getTailNode().data)
+      expect(doubleLinkedList.getTailNode().getData())
       .to.equal('shoo')
       expect(doubleLinkedList.insertBefore('shoo', 'doo'))
       .to.be.undefined
-      expect(doubleLinkedList.getTailNode().data)
+      expect(doubleLinkedList.getTailNode().getData())
       .to.equal('shoo')
     })
   })
