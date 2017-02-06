@@ -132,7 +132,7 @@ describe('Linked List', () => {
     })
   })
 
-  describe.only('insertBefore()', () => {
+  describe('insertBefore()', () => {
     it('Inserts a node (with data) before the first node containing (item)', () => {
       const linkedList = new LinkedList()
       linkedList.insertFirst('foo')
